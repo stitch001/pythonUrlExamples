@@ -19,7 +19,7 @@ request = urllib2.Request(url)
 response = urllib2.urlopen(request)
 repstr = response.read()
 '''
-# 3.加入请求参数和UA(user Agent)
+# 3.加入请求参数
 url2 = url+'/search?'
 values = {'q':'123'}
 data = urllib.urlencode(values)
