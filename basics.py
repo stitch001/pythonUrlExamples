@@ -10,7 +10,7 @@ import urllib
 
 
 url = 'http://cn.bing.com'
-
+'''
 # 2.直接发送url请求
 response = urllib2.urlopen(url)
 repstr = response.read()
@@ -41,21 +41,27 @@ headers = { 'User-Agent' : userAgent }
 data = urllib.urlencode(values)
 request=urllib2.Request(url=url2,data,headers)
 response = urllib2.urlopen()
-
+'''
 # 5.处理异常
-url3 = 'http://localhost:8080/testf/test403'
+url3 = 'http://www.mozilla.org/testf/test403'
 request = urllib2.Request(url3)
 response = None
 try: 
     response = urllib2.urlopen(request)
-except urllib2.HTTPError as e:
+#http错误 例如404 500 403 等
+#注意 httpError一定要在urlError前面，否则无法捕捉到异常
+except urllib2.HTTPError as hte:
+    print hte.code
+    print hte.read()  
+#url错误，一般是地址解析错误
+except urllib2.URLError as e:
     #输出原因
-    print e.reason()
-    #输出错误代码 404 500 ...
-    print e.code    
+    print e
 
 
+'''
 f1 = open('re.html','w+')
 f1.write(response.read())
 f1.flush()
 f1.close()
+'''
