@@ -10,16 +10,16 @@ def pageDict(site):
         "chinanews.com":[
             "content" #content
         ],
-        "http://news.163.com":[
+        "netEaseNews":[
             "h1#h1title", #title
             "div.ep-time-soure", #time&source
             'div#endText>p', #"content":
         ],
-        "http://www.ithome.com":[
+        "ithomeNews":[
             "div.post_title", #title time&source
             "div#paragraph>p",
         ],
-        "http://www.cnbeta.com":[
+        "cnbetaNews":[
             "div.body>header", #title time source
             "div.introduction", #introduction
             "div.content", #content

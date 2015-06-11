@@ -6,6 +6,7 @@ Created on 2015年6月7日
 '''
 from pyquery import PyQuery as pq
 import PageContent
+import re
 #url = "http://www.ithome.com"
 #d('div.new-list-1>ul>li.new'
 
@@ -72,14 +73,17 @@ def cnbetaNews():
             urls.append(url + itemSub.find('div.title').find('a').attr('href'))
     return urls
 
-def writeNewsToFile(url,contentSelectors,titleSelector):
+def writeNewsToFile(url,contentSelectors):
     d = pq(url)
     htmlContent = ''
+    #get file name from 
+    fileNameRe = r'/(\w*\.(htm)|(html))'
+    fileName = re.findall(fileNameRe, url)[0][0]
     for selector in contentSelectors:
         htmlItems = d(selector)
         for item in htmlItems:
             htmlContent += d(item).outer_html()
-    files = open(url[-6:],'w+')
+    files = open(fileName,'w+')
     files.write(htmlheaderStr.encode(htmlDocEncode))
     files.write(htmlContent.encode(htmlDocEncode))
     files.write('</html>'.encode(htmlDocEncode))
@@ -93,5 +97,6 @@ def writeNewsToFile(url,contentSelectors,titleSelector):
 #pageSelectors = PageContent.pageDict("www.ithome.com")
 
 urls = cnbetaNews()
-pageSelectors = PageContent.pageDict("http://www.cnbeta.com")
-writeNewsToFile(urls[1],pageSelectors,None)
+print urls
+pageSelectors = PageContent.pageDict("cnbetaNews")
+writeNewsToFile(urls[1],pageSelectors)
